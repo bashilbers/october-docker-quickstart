@@ -1,3 +1,6 @@
+echo "> Grabbing october"
+docker run --rm -it -v $(pwd)/www:/app --workdir /app composer create-project october/october /app/october
+
 echo "> Building all containers"
 docker-compose build
 
@@ -8,9 +11,8 @@ echo "> Creating database"
 # Grab the container hash for mysql and crate adatabase (only when not-yet existing...)
 echo "CREATE DATABASE IF NOT EXISTS october DEFAULT CHARACTER SET utf8;" | docker exec -i $(docker-compose ps -q mysql) mysql -uroot -proot
 
-echo "> installing october"
-docker run --rm -it -v $(pwd):/app --workdir /app composer create-project october/october www
-docker-compose exec october php artisan october:install
+echo "> Installing october"
+docker-compose exec october php october/artisan october:install
 
 #echo "> Cleaning up installation"
 #rm -rf install_files
