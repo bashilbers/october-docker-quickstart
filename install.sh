@@ -1,7 +1,3 @@
-echo "> Cloning repo"
-git clone git@github.com:bashilbers/october-docker-quickstart
-cd october-docker-quickstart
-
 echo "> Building all containers"
 docker-compose build
 
